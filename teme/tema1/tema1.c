@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdarg.h>						
 #include <string.h>						
-
+// #include <stdio.h>
 static int write_stdout(const char *token, int length)
 {
 	int rc;
@@ -52,17 +52,17 @@ int iocla_printf(const char *format, ...)
 			write_stdout(buff, 2);
 			finalLength = finalLength + 1;
 		} else if (format[i] != '%') {
-			write_stdout(format[i], 1);
+			write_stdout((format + i), 1);
 			finalLength++;
 		} else if (format[i + 1] == '%') {
-			write_stdout(format[i + 1], 1);
+			write_stdout((format + i), 1);
 			finalLength++;
 		} else if (format[i + 1] == 'd') {
 			i++;
 			int number = va_arg(arg, int);
 			if(number < 0) { 
 				number = -number;
-				write_stdout('-', 1);
+				write_stdout("-", 1);
 				finalLength++;
 			} 
 			char * buff = convert(number, 10);
@@ -79,13 +79,13 @@ int iocla_printf(const char *format, ...)
 		} else if (format[i + 1] == 'x') {
 			i++;
 			int number = va_arg(arg, unsigned int);
-			char * buff = convert(i,16);
+			char * buff = convert(number, 16);
 			int buffLength = strlen(buff);
 			finalLength = finalLength + buffLength;
 			write_stdout(buff, buffLength);
 		} else if (format[i + 1] == 'c') {
 			i++;
-			char chr = va_arg(arg, char);
+			char chr = (char)va_arg(arg, int);
 			int number = (int)chr;
 			char * buff = convert(i,10);
 			int buffLength = strlen(buff);
@@ -104,3 +104,11 @@ int iocla_printf(const char *format, ...)
 	va_end(arg);
 	return -1;
 }
+
+// int main() {
+
+// 	printf("abc\n");
+// 	iocla_printf("sad%x%%", 17);
+
+// 	return 0;
+// }
