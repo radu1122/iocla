@@ -1,1 +1,14 @@
 Copyright Radu-Andrei Dumitrescu 322CA 2020
+
+- am folosit va_list pentru a controla variabilele suplimentare
+- pentru a trece prin tot stringul am iterat cu un for de la 0 la length de string
+- pentru fiecare case am folosit un if care verifica charul curent si aici erau urmatoarele use caseuri:
+    - daca era "\" verifica urmatorul caracter pentru a face escape
+    - daca nu era "%" printa direct caracterul
+    - daca era "%", dar urmatorul char era tot "%", atunci printa "%"
+    - daca era "%" urmat de "d", printa un int transformat in string cu o fn de conversie
+    - daca era "%" urmat de "u", printa un unsigned int transformat in string cu o fn de conversie
+    - daca era "%" urmat de "x", printa un int transformat in B16 si in string cu o fn de conversie
+    - daca era "%" urmat de "c", printa un char
+    - daca era "%" urmat de "s", printa un string
+
