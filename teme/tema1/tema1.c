@@ -1,7 +1,9 @@
+// copyright Radu-Andrei Dumitrescu 322CA 2020
+
 #include <unistd.h>
 #include <stdarg.h>						
 #include <string.h>						
-// #include <stdio.h>
+
 static int write_stdout(const char *token, int length)
 {
 	int rc;
@@ -20,13 +22,12 @@ static int write_stdout(const char *token, int length)
 
 char *convert(unsigned int num, int base) 
 { 
-	static char Representation[]= "0123456789ABCDEF";
+	static char Representation[]= "0123456789abcdef";
 	static char buffer[50]; 
 	char *ptr; 
 	
 	ptr = &buffer[49]; 
 	*ptr = '\0'; 
-	
 	do 
 	{ 
 		*--ptr = Representation[num%base]; 
@@ -38,7 +39,6 @@ char *convert(unsigned int num, int base)
 
 int iocla_printf(const char *format, ...)
 {
-	//Module 1: Initializing Myprintf's arguments 
 	va_list arg; 
 	va_start(arg, format); 
 	int i = 0;
@@ -50,11 +50,12 @@ int iocla_printf(const char *format, ...)
 			buff[1] = format[i + 1];
 			i++;
 			write_stdout(buff, 2);
-			finalLength = finalLength + 1;
+			finalLength = finalLength + 2;
 		} else if (format[i] != '%') {
 			write_stdout((format + i), 1);
 			finalLength++;
 		} else if (format[i + 1] == '%') {
+			i++;
 			write_stdout((format + i), 1);
 			finalLength++;
 		} else if (format[i + 1] == 'd') {
@@ -78,37 +79,25 @@ int iocla_printf(const char *format, ...)
 			write_stdout(buff, buffLength);
 		} else if (format[i + 1] == 'x') {
 			i++;
-			int number = va_arg(arg, unsigned int);
+			int number = va_arg(arg, int);
 			char * buff = convert(number, 16);
 			int buffLength = strlen(buff);
 			finalLength = finalLength + buffLength;
 			write_stdout(buff, buffLength);
 		} else if (format[i + 1] == 'c') {
 			i++;
-			char chr = (char)va_arg(arg, int);
-			int number = (int)chr;
-			char * buff = convert(i,10);
-			int buffLength = strlen(buff);
-			finalLength = finalLength + buffLength;
-			write_stdout(buff, buffLength);
+			char s = (char)va_arg(arg, int);
+			finalLength++;
+			write_stdout(&s, 1);
 		} else if (format[i + 1] == 's') {
-			char *s = va_arg(arg,char *);
+			i++;
+			char *s = va_arg(arg, char *);
 			int buffLength = strlen(s);
 			finalLength = finalLength + buffLength;
 			write_stdout(s, buffLength);
 		}
 		i++;
 	} 
-	
-	//Module 3: Closing argument list to necessary clean-up
 	va_end(arg);
-	return -1;
+	return finalLength;
 }
-
-// int main() {
-
-// 	printf("abc\n");
-// 	iocla_printf("sad%x%%", 17);
-
-// 	return 0;
-// }
