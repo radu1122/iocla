@@ -55,7 +55,6 @@ small_letters:
 end_loop:
     mov byte [edx + eax], bl
     add eax, 1
-    cmp ecx, eax 
     loop start_string_iteration
 
     ; PRINTF32 "%s\n", edx

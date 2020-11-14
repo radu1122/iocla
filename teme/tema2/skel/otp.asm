@@ -25,7 +25,6 @@ start_string_iteration:
     mov BYTE [edx + eax], bl
 
     add eax, 1
-    cmp ecx, eax 
     loop start_string_iteration
 
     ;; DO NOT MODIFY
