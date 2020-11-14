@@ -26,7 +26,7 @@ start_string_iteration:
 
     add eax, 1
     cmp ecx, eax 
-    jne start_string_iteration
+    loop start_string_iteration
 
     ;; DO NOT MODIFY
     popa
