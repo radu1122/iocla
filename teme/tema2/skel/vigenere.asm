@@ -71,7 +71,9 @@ end_loop:
     mov byte [edx + eax], bl
     add eax, 1
     cmp [ebp + 16], eax 
-    jne start_string_iteration    ;; DO NOT MODIFY
+    jne start_string_iteration
+    
+    ;; DO NOT MODIFY
 
     popa
     leave
