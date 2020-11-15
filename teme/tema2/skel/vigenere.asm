@@ -18,26 +18,61 @@ vigenere:
     ;; DO NOT MODIFY
 
     ;; TODO: Implement the Vigenere cipher
+init_loop_counter:
+    xor ecx, ecx
+    mov eax, 0 ; used to loop
+    mov ecx, 0 ; used to loop key 
 
-init_loop_generate_key:
-    mov edx, ebx ; used to loop
-    mov ebx, 0 ; used to loop
-start_generate_key_loop:
-    cmp ebx, [ebp + 24]
-    jne end_loop
-    mov ebx, 0
+start_string_iteration:
+    cmp ecx, [ebp + 24]
+    jne loop_real_start
+    mov ecx, 0
+    jmp loop_real_start
+    
+loop_real_start:
+
+    movzx ebx, byte [esi + eax]
+    
+    cmp ebx, 64 ; Bigger than Letter 'A'
+    jle small_letters
+    cmp ebx, 90 ; Smaller than Letter 'Z'
+    jg small_letters
+
+    sub bx, 65
+    add bl, byte [edi + ecx] ; aici adaug noul meu cod 
+    add ecx, 1
+    cmp bl, 90
+
+    jle end_loop
+    sub ebx, 26
+
+    jmp end_loop
+
+small_letters:
+    cmp ebx, 96  ; bigger than letter 'a'
+    jle end_loop
+    cmp ebx, 122 ; smaller than letter 'z'
+    jg end_loop
+
+    sub bx, 65
+    add bl, byte [edi + ecx] ; aici adaug noul meu cod 
+    add ecx, 1
+    cmp bx, 122
+
+
+    jle end_loop
+    sub ebx, 26
+
+
     jmp end_loop
 
 end_loop:
-    movzx eax, BYTE [edi + ebx]
-    mov BYTE [edi + edx], al
-    add edx, 1
-    add ebx, 1
-    cmp ecx, edx 
-    jne start_generate_key_loop
 
-    PRINTF32 "%s\n", edi
-    ;; DO NOT MODIFY
+    mov byte [edx + eax], bl
+    add eax, 1
+    cmp [ebp + 16], eax 
+    jne start_string_iteration    ;; DO NOT MODIFY
+
     popa
     leave
     ret
