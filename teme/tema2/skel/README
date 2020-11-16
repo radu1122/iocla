@@ -1,0 +1,19 @@
+Copyright Radu-Andrei Dumitrescu 322CA - 2020
+
+Task 1:
+  - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul
+  - in el am facut xor intre elementul curent din text cu cel din key 
+  - am pus rezultatul in edx
+  
+Task 2:
+  - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul
+  - am creat 2 mari if-uri
+    - primul verifica daca elementul curent este intre 'A' si 'Z'
+        daca TRUE:
+          - adaug la elementul curent 'key'
+          - daca elementul final era mai mare decat 'Z', atunci scadeam 26 pentru a ramane in range
+    - al 2-lea verifica daca este intre 'a' si 'z'
+        daca TRUE:
+          - adaug la elementul curent 'key'
+          - daca elementul final era mai mare decat 'z', atunci scadeam 26 pentru a ramane in range
+    
