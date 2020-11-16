@@ -1,5 +1,9 @@
 %include "io.mac"
 
+section .data
+    hexLetters db "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
+
+
 section .text
     global bin_to_hex
     extern printf
@@ -57,16 +61,50 @@ finish_pow:
 
 
 end_loop:
-    ; mov edx, [ebp + 8]      ; hexa_value
-    ; mov byte [edx + eax], bl
-    ; add eax, 1
     cmp eax, 0
     jne start_string_iteration
 
 
-    add ebx, 1
+    add ebx, 1 ; final decimal value
 
-    PRINTF32 `%x\n\x0`, ebx
+
+
+    mov eax, ebx ; change registry to make it easier for modulo
+    mov ecx, 0
+    mov esi, eax
+
+start_loop_dec2hex_iterate:
+    xor edx, edx
+    mov ebx, 16
+    div ebx
+
+
+end_loop_dec2hex_iterate:
+    add ecx, 1
+    cmp eax, 0
+    jne start_loop_dec2hex_iterate
+
+
+    mov edx, [ebp + 8]      ; hexa_value
+    mov byte [edx + ecx], 10
+    sub ecx, 1
+
+    mov eax, esi ; change registry to make it easier for modulo
+
+start_loop_dec2hex:
+    xor edx, edx
+    mov ebx, 16
+    div ebx
+    mov bl, byte [hexLetters + edx]
+    mov edx, [ebp + 8]      ; hexa_value
+    mov byte [edx + ecx], bl
+
+
+end_loop_dec2hex:
+    sub ecx, 1
+    cmp eax, 0
+    jne start_loop_dec2hex
+    
 
     ;; DO NOT MODIFY
     popa
