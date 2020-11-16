@@ -27,3 +27,9 @@ Task 3:
   - pentru elementul curent din 'key' foloseam un counter care devenea 0 de fiecare daca cand ajungea sa fie egal
     cu 'key_len'
 
+Task 4:
+  - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul haystack
+  - daca elementul curent era identic cu primul din needle, intram intr-un loop care verifica tot needle fata de 
+    urmatoarele elemente din haystack. Daca toate erau identice faceam jmp final, daca nu, reveneam in loopul initial
+
+  
