@@ -5,6 +5,8 @@ Task 1:
   - in el am facut xor intre elementul curent din text cu cel din key 
   - am pus rezultatul in edx
   
+-----------------------------------------------------------------------------------------------------------------
+  
 Task 2:
   - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul
   - am creat 2 mari if-uri
@@ -16,4 +18,12 @@ Task 2:
         daca TRUE:
           - adaug la elementul curent 'key'
           - daca elementul final era mai mare decat 'z', atunci scadeam 26 pentru a ramane in range
-    
+
+-----------------------------------------------------------------------------------------------------------------
+          
+Task 3:
+  - abordarea a fost la fel ca la taskul 3, diferenta este ca aici nu adaugam la elementul curent 'key',
+    ci elemetul curent din 'key string'
+  - pentru elementul curent din 'key' foloseam un counter care devenea 0 de fiecare daca cand ajungea sa fie egal
+    cu 'key_len'
+
