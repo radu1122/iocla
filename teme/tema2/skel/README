@@ -31,5 +31,8 @@ Task 4:
   - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul haystack
   - daca elementul curent era identic cu primul din needle, intram intr-un loop care verifica tot needle fata de 
     urmatoarele elemente din haystack. Daca toate erau identice faceam jmp final, daca nu, reveneam in loopul initial
+    
+Task 5:
+  - am transformat stringul binary in int si apoi intul l-am transformat in hex string
 
   
