@@ -57,7 +57,6 @@ end_loop:
     add eax, 1
     loop start_string_iteration
 
-    ; PRINTF32 "%s\n", edx
 
     ;; DO NOT MODIFY
     popa

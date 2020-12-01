@@ -1,0 +1,38 @@
+Copyright Radu-Andrei Dumitrescu 322CA - 2020
+
+Task 1:
+  - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul
+  - in el am facut xor intre elementul curent din text cu cel din key 
+  - am pus rezultatul in edx
+  
+-----------------------------------------------------------------------------------------------------------------
+  
+Task 2:
+  - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul
+  - am creat 2 mari if-uri
+    - primul verifica daca elementul curent este intre 'A' si 'Z'
+        daca TRUE:
+          - adaug la elementul curent 'key'
+          - daca elementul final era mai mare decat 'Z', atunci scadeam 26 pentru a ramane in range
+    - al 2-lea verifica daca este intre 'a' si 'z'
+        daca TRUE:
+          - adaug la elementul curent 'key'
+          - daca elementul final era mai mare decat 'z', atunci scadeam 26 pentru a ramane in range
+
+-----------------------------------------------------------------------------------------------------------------
+          
+Task 3:
+  - abordarea a fost la fel ca la taskul 3, diferenta este ca aici nu adaugam la elementul curent 'key',
+    ci elemetul curent din 'key string'
+  - pentru elementul curent din 'key' foloseam un counter care devenea 0 de fiecare daca cand ajungea sa fie egal
+    cu 'key_len'
+
+Task 4:
+  - am creat un loop care incepe cu labelul "start_string_iteration" si itereaza prin tot stringul haystack
+  - daca elementul curent era identic cu primul din needle, intram intr-un loop care verifica tot needle fata de 
+    urmatoarele elemente din haystack. Daca toate erau identice faceam jmp final, daca nu, reveneam in loopul initial
+    
+Task 5:
+  - am transformat stringul binary in int si apoi intul l-am transformat in hex string
+
+  
