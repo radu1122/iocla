@@ -14,43 +14,36 @@ global create_tree
 global iocla_atoi
 
 iocla_atoi:
-    ; TODO
-    enter 0,0
-;     mov eax, dword [esp + 8]
-;     xor ecx, ecx
-;     movzx ebx, byte [eax]
-;     cmp bl, 45
-;     jne start_iteration
-;     mov ecx, 1
-;     xor edx, edx
-
-; start_iteration:
-;     ; mul edx, 10
-;     lea edx, [edx + edx * 4]
-;     add edx, edx
-;     movzx ebx, byte [eax + ecx]
-
-;     cmp bl, 10 ; check if \0
-;     jne final_atoi
-;     add edx, ebx
-;     sub edx, 48
-    
-;     add ecx, 1
-;     jmp start_iteration
-
-; final_atoi:
-;     mov eax, dword [esp + 8]
-;     movzx ebx, byte [eax]
-;     cmp bl, 45
-;     jne return_atoi
-;     neg edx
-;     jmp return_atoi
-
-; return_atoi:
-;     mov eax, edx
-;     pop ebx
-    leave
-    ret
+        push    esi
+        push    ebx
+        xor     ecx, ecx
+        mov     eax, DWORD PTR [esp+12]
+        mov     esi, 1
+        movsx   edx, BYTE PTR [eax]
+        cmp     dl, 45
+        jne     .L2iocla_atoi
+        movsx   edx, BYTE PTR [eax+1]
+        mov     esi, -1
+        mov     ecx, 1
+.L2iocla_atoi:
+        lea     ebx, [edx-48]
+        lea     ecx, [eax+1+ecx]
+        xor     eax, eax
+        cmp     bl, 9
+        ja      .L1iocla_atoi
+.L3iocla_atoi:
+        lea     ebx, [eax+eax*4]
+        add     ecx, 1
+        lea     eax, [edx-48+ebx*2]
+        movsx   edx, BYTE PTR [ecx-1]
+        lea     ebx, [edx-48]
+        cmp     bl, 9
+        jbe     .L3iocla_atoi
+        imul    eax, esi
+.L1iocla_atoi:
+        pop     ebx
+        pop     esi
+        ret
 
 add_tree:
         push    ebp
