@@ -1,0 +1,37 @@
+Copyright Radu-Andrei Dumitrescu 322CA 2020
+
+* Time spent on homework: in 2 days -> about 6 hours
+
+* I've implemented 3 methods:
+    * iocla_atoi
+        * this function replicate the use of atoi from C
+        * if also works for negative numbers
+        * I implemented a simple algorithm where I iterate from all string and check if
+        the current char is a number and if so, then add it to my number
+        * number formula in the algorithm: num = num * 10 + (string[i] - '0')
+        * at the end I multiple this number with 1 or -1, if the first char of the string
+        is '-'
+        * the function returns the final int
+    * create_tree
+        * receive a string
+        * here I simply call the recursive function add_node
+        * returns a Node pointer to the first node of the binary tree
+    * add_node
+        * receive a Node pointer and a string containing the prefix read of the tree
+        * this function is recursive
+        * at first checks if there is a space in the string or if the string got to the '\0'
+        * I used an "infinite loop" that finish only on return
+        * if the while I fist I create a new node with malloc
+        * here I check if current char is a digit or if the next char is a digit, the second one
+        means that the number if negative
+        * I iterate from that point to the point where the number finish to get the number length
+        * I call strndup after that to get the node data
+        * after the new node creation is done I do a check to see if the curr element if a number,
+        if so, the function returns pointer to that element
+        * if not, I recursively call add_node for the left child of the Node
+        * after the left child is done, I call the function for the right child of the Node
+
+* Problems encountered:
+    * one of the hardest thing to do was to make the algorithm to work if the number has more than 1 digit
+    * also, I found it hard to test directly with the checker, so I had to check everything manually
+    

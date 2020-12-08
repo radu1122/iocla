@@ -7,7 +7,6 @@ section .bss
 
 section .text
 
-extern evaluate_ast
 extern malloc
 extern strndup
 global create_tree
@@ -35,7 +34,7 @@ atoi_string_iterator:
         lea     ebx, [eax + eax * 4]
         add     ecx, 1
         lea     eax, [edx - 48 + ebx * 2]
-        movsx   edx, BYTE [ecx - 1]
+        movsx   edx, BYTE [ecx-  1]
         lea     ebx, [edx - 48]
         cmp     bl, 9 ; check if number
         jbe     atoi_string_iterator
@@ -56,10 +55,10 @@ add_node:
 start_algo_add_node:
         movzx   edx, BYTE [esi]
         cmp     dl, 32
-        jne     start_while_true
+        jne     start_while_iterator
         movzx   edx, BYTE [esi + 1]
         add     esi, 1
-start_while_true:
+start_while_iterator:
         test    dl, dl
         je      finish_iterator
         mov     ebp, DWORD [edi]
@@ -71,7 +70,7 @@ start_while_true:
         push    12
         call    malloc
         mov     ebp, eax
-        movzx   eax, BYTE [esi+1]
+        movzx   eax, BYTE [esi + 1]
         add     esp, 16
         sub     eax, 48
         cmp     al, 9
@@ -81,10 +80,10 @@ create_node_in_memory:
         push    ebx
         push    esi
         call    strndup ; duplicate the number from the string
-        mov     DWORD [ebp+4], 0
-        mov     DWORD [ebp+0], eax
+        mov     DWORD [ebp + 4], 0
+        mov     DWORD [ebp + 0], eax
         add     esp, 16
-        mov     DWORD [ebp+8], 0
+        mov     DWORD [ebp + 8], 0
         mov     DWORD [edi], ebp
         movzx   edx, BYTE [esi]
         test    dl, dl
@@ -100,35 +99,35 @@ add_node_return:
         ret
 iterate_string_check_number:
         add     ebx, 1
-        movzx   eax, BYTE [esi+ebx]
-        lea     edx, [eax-48]
+        movzx   eax, BYTE [esi + ebx]
+        lea     edx, [eax - 48]
         cmp     dl, 9
         ja      create_node_in_memory
         add     ebx, 1
-        movzx   eax, BYTE [esi+ebx]
-        lea     edx, [eax-48]
+        movzx   eax, BYTE [esi + ebx]
+        lea     edx, [eax - 48]
         cmp     dl, 9
         jbe     iterate_string_check_number
         jmp     create_node_in_memory
 check_if_number:
         sub     edx, 48
-        lea     eax, [esi+ebx]
+        lea     eax, [esi + ebx]
         cmp     dl, 9
-        jbe     finish_iterator
-        movzx   edx, BYTE [esi+1]
+        jbe     add_node_return
+        movzx   edx, BYTE [esi + 1]
         sub     edx, 48
         cmp     dl, 9
-        jbe     finish_iterator
+        jbe     add_node_return
         sub     esp, 8
         add     ebp, 4
         push    eax
         push    ebp
-        call    add_node ; add left child 
+        call    add_node ; add left child
         mov     edi, DWORD [edi]
-        lea     esi, [eax+ebx]
+        lea     esi, [eax + ebx]
         add     esp, 16
         add     edi, 8
-        jmp     start_algo_add_node ; add rigth child
+        jmp     start_algo_add_node ; add right child
 
 
 create_tree:
