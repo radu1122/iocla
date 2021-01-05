@@ -2,4 +2,6 @@ Copyright Radu-Andrei Dumitrescu 322CA  2020
 
 1. Analiza binarului
 	- pentru a rezolva acest task am folosit objdump ca sa extrag codul, iar gdb pentru a trece prin program pas cu pas.
-	- am ajuns la concluzia ca functia vulnerabila este print_flag si are adresa 
+	- am ajuns la concluzia ca functia vulnerabila este print_flag si are adresa 08049291
+	- vulnerabilitatea apare cand se face "call eax", adica la adresa 8049327 pentru ca eax nu contine adresa unei functii,
+	  ci o valoare oarecare citita de noi
