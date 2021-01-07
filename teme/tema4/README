@@ -5,4 +5,11 @@ Copyright Radu-Andrei Dumitrescu 322CA  2020
 	- am ajuns la concluzia ca functia vulnerabila este print_flag si are adresa 08049291
 	- vulnerabilitatea apare cand se face "call eax", adica la adresa 8049327 pentru ca eax nu contine adresa unei functii,
 	  ci o valoare oarecare citita de noi
-2. NICE_FLAG{f19461f74915cde66367f80b82edb3fc}
+2. Spargerea binarului
+	- flag: NICE_FLAG{f19461f74915cde66367f80b82edb3fc}
+	- am facut un one liner pentru a genera random 500 caractere: tr -dc A-Za-z0-9 </dev/urandom | head -c 500
+	- apoi am folosit gdb cu break point in main pana am ajuns unde se face "call eax"
+	- am printat valoarea lui eax pentru a vedea ce 4 caractere are in el si apoi am verificat in fisierul text unde sunt acele 4 caractere
+	- am sters de la acele 4 caractere tot pana la final de fisier, inclusiv acele 4 caractere
+	- apoi am adaugat cu ajutorul unui hex editor la final adresa functiei print_flag avand in vedere ca trebuie in little endian
+	- dupa ce am mai testat o data ca in eax este adresa care trebuie am rulat normal binarul nice cu inputul generat
