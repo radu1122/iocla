@@ -5,3 +5,4 @@ Copyright Radu-Andrei Dumitrescu 322CA  2020
 	- am ajuns la concluzia ca functia vulnerabila este print_flag si are adresa 08049291
 	- vulnerabilitatea apare cand se face "call eax", adica la adresa 8049327 pentru ca eax nu contine adresa unei functii,
 	  ci o valoare oarecare citita de noi
+2. NICE_FLAG{f19461f74915cde66367f80b82edb3fc}
