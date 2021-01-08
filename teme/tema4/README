@@ -13,3 +13,12 @@ Copyright Radu-Andrei Dumitrescu 322CA  2020
 	- am sters de la acele 4 caractere tot pana la final de fisier, inclusiv acele 4 caractere
 	- apoi am adaugat cu ajutorul unui hex editor la final adresa functiei print_flag avand in vedere ca trebuie in little endian
 	- dupa ce am mai testat o data ca in eax este adresa care trebuie am rulat normal binarul nice cu inputul generat
+3. NAUGHTY_FLAG{1cfc40f75856f16b58bafc5b767e41b8}
+
+
+
+
+//42 apoi 4 apoi restul pana la 85
+// 48 apoi 4 apoi generez pana la 72
+// 18 apoi 4 apoi pana la 46
+// 242 apoi 4 apoi 2 apoi 4 apoi restul pana la final
